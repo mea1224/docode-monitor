@@ -1,0 +1,43 @@
+[package]
+name = "docode-monitor"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.90"
+description = "DoCode 跨平台桌面余额与公告组件"
+license = "MIT"
+
+[dependencies]
+anyhow = "1"
+chrono = { version = "0.4", features = ["serde"] }
+directories = "6"
+eframe = { version = "0.33", default-features = false, features = ["default_fonts", "glow", "x11", "wayland"] }
+raw-window-handle = "0.6"
+image = { version = "0.25", default-features = false, features = ["png"] }
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "cookies", "rustls-tls"] }
+reqwest_cookie_store = "0.9"
+rusqlite = { version = "0.32", features = ["bundled"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[target.'cfg(any(windows, target_os = "macos"))'.dependencies]
+tray-icon = { version = "0.25.1", default-features = false }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+winit = { version = "0.30", default-features = false }
+objc2-app-kit = { version = "0.3", default-features = false, features = ["NSView", "NSWindow", "NSResponder"] }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_Graphics_Dwm", "Win32_UI_WindowsAndMessaging", "Win32_UI_Shell", "Win32_Security_Cryptography"] }
+
+[dev-dependencies]
+tempfile = "3"
+
+[build-dependencies]
+image = { version = "0.25", default-features = false, features = ["webp", "png"] }
+ico = "0.6"
+embed-resource = "3"
+
+[profile.release]
+lto = "thin"
+strip = true
+
