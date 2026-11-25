@@ -37,7 +37,7 @@ cargo build --release
 
 找中转，上Docode。
 
-立刻访问：https://docode.cc/
+使用邀请链接（有额度奖励）：https://docode.cc/register?aff=Nz9K
 
 # 许可证
 
